@@ -14,7 +14,7 @@
 #define MAX_BUS_NAME 64
 #define HSIZE 1021
 #define MAX_PQ 20000
-#define TRANSFER_PENALTY 50.0
+#define TRANSFER_PENALTY 30.0
 
 // === STRUCTS ===
 typedef struct {
@@ -44,7 +44,6 @@ typedef struct Entry {
     struct Entry *next;
 } Entry;
 
-// === GLOBALS ===
 static BusStop stops[MAX_STOPS];
 static int n_stops = 0;
 static Route routes[MAX_ROUTES];
@@ -52,7 +51,6 @@ static int n_routes = 0;
 static Entry *buckets[HSIZE] = {0};
 static BusStop *goal;
 
-// === FUNCTION PROTOTYPES ===
 BusStop *find_stop(const char *name);
 void process_bus(const char *bus_name, int seq_list[], char stop_names[][120], int cnt);
 void load_stops(const char *file);
@@ -67,7 +65,6 @@ void pq_add(Node n, Node *pq, int *pq_n);
 Node pq_pop(Node *pq, int *pq_n);
 char *make_key(char *buf, const char *r, BusStop *s);
 
-// === HASHMAP FUNCTIONS ===
 unsigned int myhash(const char *s) {
     unsigned int h = 5381;
     int c;
@@ -112,7 +109,6 @@ void hm_clear(void) {
     }
 }
 
-// === DISTANCE ===
 double distance(BusStop *a, BusStop *b) {
     double R = 6371.0;
     double dlat = (b->lat - a->lat) * M_PI / 180.0;
