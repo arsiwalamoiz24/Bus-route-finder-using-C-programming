@@ -488,19 +488,10 @@ void find_route(BusStop *start, BusStop *g) {
     free(came_from);
 }
 
-// === MAIN ===
 int main(void) {
     printf("Loading data...\n");
     load_stops("Masterfile_mumbai_bus_stops.csv");
     load_routes("(TEMPERARY)bus_routes_fully_corrected.csv");
-
-    // Debug
-    printf("\n--- SAMPLE STOPS ---\n");
-    for (int i = 0; i < 5 && i < n_stops; i++) {
-        printf("Stop: '%s' | Buses: ", stops[i].name);
-        for (int j = 0; j < stops[i].n_routes; j++) printf("%s ", stops[i].routes[j]);
-        printf("\n");
-    }
 
     while (1) {
         printf("\n--- Mumbai Bus Finder ---\n");
